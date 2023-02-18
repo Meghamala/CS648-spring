@@ -1,8 +1,8 @@
 // GET ADD EMPLOYEE FORM AND EMPLOYEE TABLE FROM THE DOM
 const table = document.getElementById('employees');
 const form = document.getElementById('addForm');
-// SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
 
+// SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
 var count = document.getElementById('empCount');
 
 var $ = function (id) {
@@ -16,12 +16,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     // GET THE VALUES FROM THE TEXT BOXES
-    var header, html, required, empID, name, extension, email, department;
-
-    header = "";
-    html = "";
-    //required = "<span>Required field</span>";
-    //msg = "Please review your entries and complete all required fields";
+    var empID, name, extension, email, department;
     empID = $('id').value;
     name = $('name').value;
     extension = $('extension').value;
@@ -29,44 +24,36 @@ form.addEventListener('submit', (e) => {
     department = $('department').value;
 
     // INSERT A NEW ROW AT THE END OF THE EMPLOYEES TABLE
-
-    const row = document.createElement('tr');
-    //var row = table.insertRow(-1);
-    //var cell = row.insertCell(-1);
-
     // INSERT A CELL FOR EACH ITEM WITHIN THE NEW ROW
     // APPEND THE TEXT VALUES AS TEXT NODES WITHIN THE CELLS
-    const idCell = document.createElement('td');
-    idCell.textContent = empID;
+    var row = table.insertRow(-1);
 
-    const nameCell = document.createElement('td');
-    nameCell.textContent = name;
+    var cell = row.insertCell(-1);
+    const idText = document.createTextNode(empID);
+    cell.appendChild(idText);
 
-    const extensionCell = document.createElement('td');
-    extensionCell.textContent = extension;
+    cell = row.insertCell(-1);
+    const nameText = document.createTextNode(name);
+    cell.appendChild(nameText);
 
-    
-    const emailCell = document.createElement('td');
-    emailCell.textContent = email;
+    cell = row.insertCell(-1);
+    const extText = document.createTextNode(extension);
+    cell.appendChild(extText);
 
-    const departmentCell = document.createElement('td');
-    departmentCell.textContent = department;
+    cell = row.insertCell(-1);
+    const emailText = document.createTextNode(email);
+    cell.appendChild(emailText);
+
+    cell = row.insertCell(-1);
+    const deptText = document.createTextNode(department);
+    cell.appendChild(deptText);
 
     // CREATE THE DELETE BUTTON
-    const actionCell = document.createElement('td');
-    const deleteButton = document.createElement('button');
+    cell = row.insertCell(-1);
+    const deleteButton = document.createElement("BUTTON");
     deleteButton.classList.add('delete-button');
     deleteButton.textContent = 'Delete';
-    actionCell.appendChild(deleteButton);
-
-    row.appendChild(idCell);
-    row.appendChild(nameCell);
-    row.appendChild(extensionCell);
-    row.appendChild(emailCell);
-    row.appendChild(departmentCell);
-    row.appendChild(actionCell);
-
-    table.querySelector('tbody').appendChild(row);
+    cell.appendChild(deleteButton);
 
     // RESET THE FORM
     // SET FOCUS BACK TO THE ID TEXT BOX
@@ -75,7 +62,7 @@ form.addEventListener('submit', (e) => {
 
     // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE
     count = table.querySelectorAll('tbody tr').length - 1;
-    $('empCount').value = count;
+    $('empCount').value = "( "+ count + " )";
 
 });
 
@@ -87,9 +74,11 @@ table.addEventListener('click', (event) => {
 
     // Only delete employees when the delete button is clicked
     if (confirmed && event.target.classList.contains('delete-button')) {
-      var newCount = table.querySelectorAll('tbody tr').length - 1;
+      
       const row = event.target.closest('tr');
-      row.parentNode.removeChild(row);
-      $('empCount').value = newCount;
+      table.deleteRow(row.rowIndex);
+      $('empCount').value = " ";
+      var newCount = table.querySelectorAll('tbody tr').length;
+      $('empCount').value = "( "+ newCount + " )";
     }
   });
