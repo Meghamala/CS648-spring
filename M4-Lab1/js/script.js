@@ -51,9 +51,11 @@ form.addEventListener('submit', (e) => {
     // CREATE THE DELETE BUTTON
     cell = row.insertCell(-1);
     const deleteButton = document.createElement("BUTTON");
-    deleteButton.classList.add('delete-button');
-    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('btn-danger');
+    deleteButton.textContent = 'X';
     cell.appendChild(deleteButton);
+
+    //<td><button class="btn btn-sm btn-danger delete">X</button></td>
 
     // RESET THE FORM
     // SET FOCUS BACK TO THE ID TEXT BOX
@@ -73,7 +75,7 @@ table.addEventListener('click', (event) => {
     const confirmed = confirm('Are you sure you want to delete employee?');
 
     // Only delete employees when the delete button is clicked
-    if (confirmed && event.target.classList.contains('delete-button')) {
+    if (confirmed && event.target.classList.contains('btn-danger')) {
       
       const row = event.target.closest('tr');
       table.deleteRow(row.rowIndex);
