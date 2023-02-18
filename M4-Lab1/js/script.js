@@ -55,8 +55,6 @@ form.addEventListener('submit', (e) => {
     deleteButton.textContent = 'X';
     cell.appendChild(deleteButton);
 
-    //<td><button class="btn btn-sm btn-danger delete">X</button></td>
-
     // RESET THE FORM
     // SET FOCUS BACK TO THE ID TEXT BOX
     form.reset();
@@ -64,7 +62,7 @@ form.addEventListener('submit', (e) => {
 
     // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE
     count = table.querySelectorAll('tbody tr').length - 1;
-    $('empCount').value = "( "+ count + " )";
+    $('empCount').innerHTML = "( "+ count + " )";
 
 });
 
@@ -79,8 +77,6 @@ table.addEventListener('click', (event) => {
       
       const row = event.target.closest('tr');
       table.deleteRow(row.rowIndex);
-      $('empCount').value = " ";
-      var newCount = table.querySelectorAll('tbody tr').length;
-      $('empCount').value = "( "+ newCount + " )";
+      $('empCount').innerHTML = "( "+ (count - 1) + " )";
     }
   });
