@@ -6,9 +6,9 @@ const app = express()
 
 app.use(express.static('public'))
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile('index.html')
-  })
+})
 
 app.use(router)
 const PORT = process.env.PORT || 5000
